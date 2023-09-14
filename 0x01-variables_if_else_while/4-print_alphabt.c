@@ -1,17 +1,19 @@
 #include <stdio.h>
+
 /**
  * main - main function
- * Description:printing digit number
+ * Description:printing alphabet in lowercase
  * Return: 0
  */
 int main(void)
 {
-	char x;
+	int ch;
 
-	for (x = 'a'; x <= 'z'; x++)
+	for (ch = 'a'; ch <= 'z'; ch++)
 	{
-		printf(x);
+	if (ch != 'q' && ch != 'e')
+		putchar(ch);
 	}
-	putchar('\n');
+		putchar('\n');
 	return (0);
 }
