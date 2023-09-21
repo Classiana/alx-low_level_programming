@@ -1,32 +1,48 @@
-#include "main.h"
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <time.h>
 /**
- * _atoi - converts a string to an integer.
- * @s: the string to convert
- * Return: the converted string.
+ * checksum - executes checksum
+ * @s: input char
+ * Return: checksum
  */
-int _atoi(char *s)
+unsigned long checksum(char *s)
 {
-	short boolean;
-	int i, minus, result;
+unsigned long sum = 0;
+while (*s != 0)
+{
+	sum += *s;
+	s++;
+}
+return (sum);
+}
+/**
+ * main - prints password for crakme
+ *
+ * Return: Always 0.
+ */
+int main(void)
+{
+	char alpha[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQSTUVWXYZ";
+	char s[33];
+	unsigned long sum;
+	int i, flag = 0;
 
-	i = minus = result = boolean = 0;
-	minus = -1;
-
-	while (s[i] != '\0')
+	srand(time(NULL));
+	while (flag == 0)
 	{
-		if (s[i] == '-')
-			minus *= -1;
-
-		if (s[i] >= '0' && s[i] <= '9')
+		for (i = 0; i < 33; i++)
 		{
-			result *= 10;
-			result -= (s[i] - '0');
-			boolean = 1;
+			s[i] = alpha[rand() % (sizeof(alpha) - 1)];
 		}
-		else if (boolean == 1)
-			break;
-		i++;
+		s[i] = '\0';
+		sum = checksum(s);
+		if (sum == 2772)
+		{
+			flag = 1;
+			printf("%s", s);
+		}
 	}
-	result *= minus;
-	return (result);
+return (0);
 }
